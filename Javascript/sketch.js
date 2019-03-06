@@ -28,9 +28,8 @@ function setup() {
     bulbasaurSheet = overworldSpritesheet.get(906, 1161, 64, 128);
     
     c = bulbasaurSheet.get(1,1);
-    image(bulbasaurSheet,0,0);
     
-    for (var i = 0; i < bulbasaurSheet.height; i++) {
+    /*for (var i = 0; i < bulbasaurSheet.height; i++) {
         for (var j = 0; j < bulbasaurSheet.width; j++) {
             b = bulbasaurSheet.get(i,j);
             
@@ -40,6 +39,7 @@ function setup() {
             }
         }
     }
+    */
     
 
     for (var i = 0; i < 2; i++) {
@@ -51,17 +51,15 @@ function setup() {
      b = new pokemon();
 }
 
-/*function draw() {
+function draw() {
     
     background(60);
+    //background(c);
     
     b.show();
     b.update();
-    Inputs();
-    
-    
+    Inputs(); 
 }
-*/
 
 function Inputs() {
     if (keyIsDown(37)) {
