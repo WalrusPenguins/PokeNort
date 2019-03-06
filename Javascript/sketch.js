@@ -9,7 +9,7 @@ function pokemon() {
     this.dir = 1;
     
     this.show = function() {
-        image(bulbasaur[2*this.dir+(frameCount % 2)],this.x,this.y);
+        image(bulbasaur[2*this.dir+(frameCount % 2)],this.x,this.y,35,35);
     }
     
     this.update = function() {
@@ -19,13 +19,14 @@ function pokemon() {
 }
 
 function preload() {
-    overworldSpritesheet = loadImage('http://localhost/OPS.png');
+    overworldSpritesheet = loadImage('http://localhost/ops.png');
+
 }
 
 function setup() {
     createCanvas(600,600);
-    frameRate(5);
-    bulbasaurSheet = overworldSpritesheet.get(906, 1161, 64, 128);
+    frameRate(8);
+    bulbasaurSheet = overworldSpritesheet.get(64, 1161, 64, 128);
     
     c = bulbasaurSheet.get(1,1);
     
@@ -53,8 +54,8 @@ function setup() {
 
 function draw() {
     
-    background(60);
-    //background(c);
+    //background(60);
+    background(c);
     
     b.show();
     b.update();
