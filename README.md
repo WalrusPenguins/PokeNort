@@ -1,3 +1,3 @@
 # PokeNort
 ---
-Welcome to a land of mystery.
+Welcome to a land of mystery. By *YRyan* and *YAle*
