@@ -24,7 +24,7 @@ function pokemon(num) {
 }
 
 function preload() {
-    overworldSpritesheet = loadImage('http://localhost/ops-clear.png');
+    overworldSpritesheet = loadImage('Assets/ops-clear.png');
 
 }
 
