@@ -5,36 +5,50 @@
 sheetList = [];
 pokemonList = [];
 pokemonSpriteList = [];
+positionList = [];
 
 function pokemon(num) {
-    this.x = 32*num;
+    this.x = 8*num;
     this.y = 0;
     this.xvel = 0;
     this.yvel = 0;
     this.dir = 1;
     
-    this.show = function(num) {
-        image(pokemonSpriteList[num][2*this.dir+(frameCount % 2)],this.x,this.y,35,35);
+    for (var i = 0; i < 8; i++) {
+        positionList.push([this.x,this.y,this.dir]);
     }
     
-    this.update = function() {
+    this.show = function(num) {
+        image(pokemonSpriteList[num][2*this.dir+(frameCount % 2)],this.x,this.y);
+    }
+    
+    this.update = function(num) {
+        this.x = positionList[8*num-1][0];
+        this.y = positionList[8*num-1][1];
+        this.dir = positionList[8*num-1][2];
+    }
+    
+    this.movement = function() {
         this.x += this.xvel;
         this.y += this.yvel;
+        if (this.yvel != 0 || this.xvel != 0) {
+            positionList.unshift([this.x,this.y,this.dir]);
+            positionList.pop();
+        }
     }
 }
 
 function preload() {
-    overworldSpritesheet = loadImage('Assets/ops-clear.png');
-
+    overworldSpritesheet = loadImage('Assets/ops-final.png');
 }
 
 function setup() {
-    createCanvas(600,600);
+    createCanvas(400,400);
     frameRate(8);
     
-    for (var i = 0; i < 15; i++) {
-        for (var j = 0; j < 11; j++) {
-            if (j != 11 || i < 3) {
+    for (var j = 0; j < 11; j++) {
+        for (var i = 0; i < 15; i++) {    
+            if (j != 10 || i < 3) {
                 sheetList.push(overworldSpritesheet.get(65*i, 129*j, 64, 128));
             }
         }
@@ -55,43 +69,37 @@ function draw() {
     
     background(60);
     
-    for (var i = 0; i < sheetList.length; i++) {
+    pokemonList[0].movement();
+    pokemonList[0].show(0);
+
+    for (var i = 1; i < pokemonList.length; i++) {
         pokemonList[i].show(i);
-        pokemonList[i].update();
+        pokemonList[i].update(i);
     }
     
     Inputs();
 }
 
-
 //Please ignore how clapped this is idk what else to do hahaha
 function Inputs() {
     if (keyIsDown(37)) {
-        for (var i = 0; i < sheetList.length; i++) {
-            pokemonList[i].xvel = -5;
-            pokemonList[i].yvel = 0;
-            pokemonList[i].dir = 2;
-        }  
+        pokemonList[0].xvel = -4;
+        pokemonList[0].yvel = 0;
+        pokemonList[0].dir = 2;
     }
     if (keyIsDown(38)) {
-        for (var i = 0; i < sheetList.length; i++) {
-            pokemonList[i].xvel = 0;
-            pokemonList[i].yvel = -5;
-            pokemonList[i].dir = 0;
-        }  
+        pokemonList[0].xvel = 0;
+        pokemonList[0].yvel = -4;
+        pokemonList[0].dir = 0;
     }
     if (keyIsDown(39)) {
-        for (var i = 0; i < sheetList.length; i++) {
-            pokemonList[i].xvel = 5;
-            pokemonList[i].yvel = 0;
-            pokemonList[i].dir = 3;
-        }  
+        pokemonList[0].xvel = 4;
+        pokemonList[0].yvel = 0;
+        pokemonList[0].dir = 3;
     }
     if (keyIsDown(40)) {
-        for (var i = 0; i < sheetList.length; i++) {
-            pokemonList[i].xvel = 0;
-            pokemonList[i].yvel = 5;
-            pokemonList[i].dir = 1;
-        }  
+        pokemonList[0].xvel = 0;
+        pokemonList[0].yvel = 4;
+        pokemonList[0].dir = 1;
     }  
 }
